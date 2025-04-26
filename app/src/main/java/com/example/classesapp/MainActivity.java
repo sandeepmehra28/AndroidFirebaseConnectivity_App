@@ -3,25 +3,30 @@ package com.example.classesapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     Button logout;
     EditText name;
     Button add;
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
          logout=findViewById(R.id.logout);
          name = findViewById(R.id.name);
          add = findViewById(R.id.add);
+         listView = findViewById(R.id.listView);
          logout.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -49,9 +55,28 @@ public class MainActivity extends AppCompatActivity {
                    Toast.makeText(MainActivity.this, "Please enter a name", Toast.LENGTH_SHORT).show();
 
                }else {
-                   FirebaseDatabase.getInstance().getReference().child("ClassesAppData").push().setValue(txt_name);
+                   FirebaseDatabase.getInstance().getReference().child("languages").child("lang").push().setValue(txt_name);
                }
            }
        });
+        ArrayList<String>  list = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.list_item,list);
+        listView.setAdapter(adapter);
+        DatabaseReference reference  = FirebaseDatabase.getInstance().getReference().child("languages");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                list.clear();
+                for(DataSnapshot snapshot:datasnapshot.getChildren()){
+                    list.add(snapshot.getValue().toString());
+
+                }adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
