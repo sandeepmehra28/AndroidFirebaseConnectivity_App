@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ClassesApp"
         tools:targetApi="31">
         <activity
+            android:name=".loginActivity2"
+            android:exported="false" />
+        <activity
             android:name=".list_item"
             android:exported="false" />
         <activity

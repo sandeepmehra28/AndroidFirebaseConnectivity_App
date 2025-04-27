@@ -16,8 +16,15 @@ public class StartActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_start);
         register = findViewById(R.id.register);
-        login = findViewById(R.id.login);
+        login=findViewById(R.id.login);
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this,loginActivity2.class);
+                startActivity(intent);
+            }
+        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -26,12 +33,6 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(StartActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 }
