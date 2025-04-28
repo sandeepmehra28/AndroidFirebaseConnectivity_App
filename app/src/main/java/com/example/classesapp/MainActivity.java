@@ -13,14 +13,21 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     Button logout;
@@ -30,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        Compiler EdgeToEdge = null;
+        EdgeToEdge.enable();
         setContentView(R.layout.activity_main);
          logout=findViewById(R.id.logout);
          name = findViewById(R.id.name);
@@ -78,5 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        DocumentReference ref =FirebaseFirestore.getInstance().collection("cities").document("SMA");
+        ref.update("capital",true);
     }
 }
