@@ -13,7 +13,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.internal.GoogleSignInOptionsExtensionParcelable;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,6 +27,8 @@ public class loginActivity2 extends AppCompatActivity {
     private EditText email,password;
     private Button login;
     FirebaseAuth auth;
+    FloatingActionButton fab;
+    Button btngoogle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +38,13 @@ public class loginActivity2 extends AppCompatActivity {
        password=findViewById(R.id.password2);
        login=findViewById(R.id.button2);
        auth=FirebaseAuth.getInstance();
+       fab=findViewById(R.id.floatingbtn);
+       fab.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Toast.makeText(loginActivity2.this,"your are clicked in floating button",Toast.LENGTH_SHORT).show();
+           }
+       });
        login.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {

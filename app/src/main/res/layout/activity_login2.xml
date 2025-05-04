@@ -45,16 +45,28 @@
      android:textColor="@color/white" />
 
  <Button
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_below="@id/password2"
-         android:layout_marginTop="300dp"
-         android:layout_marginLeft="80dp"
-         android:layout_marginRight="80dp"
-         android:text="login"
-         android:textSize="30dp"
      android:id="@+id/button2"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_below="@id/password2"
+     android:layout_marginLeft="80dp"
+     android:layout_marginTop="132dp"
+     android:layout_marginRight="80dp"
      android:backgroundTint="#01579B"
-         android:textAllCaps="true"
-         />
+     android:text="login"
+     android:textAllCaps="true"
+     android:textSize="30dp" />
+
+ <com.google.android.material.floatingactionbutton.FloatingActionButton
+     android:id="@+id/floatingbtn"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignParentEnd="true"
+     android:layout_alignParentRight="true"
+     android:layout_alignParentBottom="true"
+
+     android:layout_margin="16dp"
+     android:layout_marginEnd="321dp"
+     android:src="@drawable/plusicon" />
+
 </RelativeLayout>
